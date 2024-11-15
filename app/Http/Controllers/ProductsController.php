@@ -21,37 +21,36 @@ class ProductsController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validar los datos del formulario
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'description' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_id' => 'required|exists:categories,id', // Validar que la categoría exista
-            'stock' => 'required|integer|min:0', // Validar el campo 'stock'
-        ]);
+{
+    // Validar los datos del formulario
+    $validated = $request->validate([
+        'name' => 'required|string|max:255|unique:products,name',
+        'price' => 'required|numeric',
+        'description' => 'nullable|string',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'category_id' => 'required|exists:categories,id', 
+        'stock' => 'required|integer|min:0', 
+    ]);
 
-        // Guardar el producto
-        $product = new Product();
-        $product->name = $validated['name'];
-        $product->price = $validated['price'];
-        $product->description = $validated['description'];
-        $product->category_id = $validated['category_id'];
-        $product->stock = $validated['stock']; // Asignar el valor de 'stock'
-
-        // Manejar la imagen
-        if ($request->hasFile('image')) {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->storeAs('public/images', $imageName);
-            $product->image = 'images/' . $imageName;
-        }
-
-        $product->save();
-
-        // Redirigir con mensaje de éxito
-        return redirect()->route('products.index')->with('success', 'Producto creado correctamente.');
+    $imagePath = null;
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('images', 'public');
     }
+
+    // Crear y guardar el producto
+    $product = Product::create([
+        'name' => $validated['name'],
+        'price' => $validated['price'],
+        'description' => $validated['description'],
+        'category_id' => $validated['category_id'],
+        'stock' => $validated['stock'],
+        'image' => $imagePath, // Guarda la ruta relativa de la imagen
+    ]);
+
+    // Redirigir con mensaje de éxito
+    return redirect()->route('products.index')->with('success', 'Producto creado correctamente.');
+}
+
 
     public function edit($id)
     {
@@ -63,7 +62,7 @@ class ProductsController extends Controller
     {
         // Validar los datos del formulario
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255|unique:products,name',
             'price' => 'required|numeric',
             'description' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
