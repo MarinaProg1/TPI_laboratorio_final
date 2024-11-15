@@ -274,16 +274,16 @@
                         <ul class="nav">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#"> Help </a>
+                                <a class="nav-link" href="#">TPI Laboratorio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"> Licenses </a>
+                                <a class="nav-link" href="#"> Tienda online </a>
                             </li>
                         </ul>
                     </nav>
                     <div class="copyright">
                         2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                        <a href="http://www.themekita.com">ThemeKita</a>
+                        <a href="http://www.themekita.com">Juan Cruz, Federico y Marina</a>
                     </div>
 
                 </div>

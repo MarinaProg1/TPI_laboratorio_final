@@ -16,7 +16,7 @@
                     <th>Precio</th>
                     <th>Descripción</th>
                     <th>Imagen</th>
-                    <th>Accion</th>
+                    <th>Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,17 +29,29 @@
                             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
                         </td>
                         <td>
-                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <!-- Botón de Agregar con ícono -->
+                            <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i>
+                            </a>
+
+                            <!-- Botón de Editar con ícono -->
+                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+
+                            <!-- Botón de Eliminar con ícono -->
                             <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center">No products available.</td>
+                        <td colspan="5" class="text-center">No hay productos disponibles.</td>
                     </tr>
                 @endforelse
             </tbody>
