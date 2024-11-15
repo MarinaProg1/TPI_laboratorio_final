@@ -12,21 +12,22 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('assets/images/tiendaUtn1.png') }}" class="d-block w-100 carousel-image" alt="Imagen 1">
+                <img src="{{ asset('assets/images/tiendaRopa.png') }}" class="d-block w-100 carousel-image" alt="Imagen 1">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 class="carousel-title">20% de descuento</h5>
                     <p class="carousel-text">Descuentos exclusivos por tiempo limitado. ¡Aprovecha ahora!</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('assets/images/tiendaUtn2.png') }}" class="d-block w-100 carousel-image" alt="Imagen 2">
+                <img src="{{ asset('assets/images/tiendaAccesorio.png') }}" class="d-block w-100 carousel-image"
+                    alt="Imagen 2">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 class="carousel-title">Todo lo mejor!!!</h5>
                     <p class="carousel-text">Tendencias, calidad y precios increíbles te esperan aquí.</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('assets/images/tiendaUtn3.png') }}" class="d-block w-100 carousel-image" alt="Imagen 3">
+                <img src="{{ asset('assets/images/tiendaTecno.png') }}" class="d-block w-100 carousel-image" alt="Imagen 3">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 class="carousel-title">Todo lo que necesitas</h5>
                     <p class="carousel-text">Porque mereces lo mejor. Encuentra lo que amas.</p>

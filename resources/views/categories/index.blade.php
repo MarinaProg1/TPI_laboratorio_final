@@ -23,12 +23,13 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
                         <td>
-                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Editar</a>
+                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning"> <i
+                                    class="fas fa-pencil-alt"></i></a>
                             <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </td>
                     </tr>
