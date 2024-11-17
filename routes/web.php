@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OpinionController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('dashtest');
@@ -53,6 +54,16 @@ Route::prefix('opinions')->group(function () {
     Route::get('/{opinion}', [OpinionController::class, 'show'])->name('opinions.show'); // Mostrar una opinión específica
     Route::delete('/{opinion}', [OpinionController::class, 'destroy'])->name('opinions.destroy'); // Eliminar una opinión
 });
+
+//Rutas de ordenes
+Route::prefix('orders')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('orders.index'); // Mostrar todas las órdenes
+    Route::post('/', [OrderController::class, 'store'])->name('orders.store'); // Crear una nueva orden
+    Route::get('/{order}', [OrderController::class, 'show'])->name('orders.show'); // Mostrar una orden específica
+    Route::put('/{order}', [OrderController::class, 'update'])->name('orders.update'); // Actualizar una orden
+    Route::delete('/{order}', [OrderController::class, 'destroy'])->name('orders.destroy'); // Eliminar una orden
+});
+
 
 
 
