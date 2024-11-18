@@ -4,6 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\OpinionController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('dashtest');
@@ -32,6 +36,37 @@ Route::middleware('auth')->group(function () {
 
 
 });
+
+
+//Rutas de factura
+Route::prefix('invoices')->group(function () {
+    Route::get('/', [InvoiceController::class, 'index'])->name('invoices.index'); // Mostrar todas las facturas
+    Route::post('/', [InvoiceController::class, 'store'])->name('invoices.store'); // Crear una nueva factura
+    Route::get('/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show'); // Mostrar una factura específica
+    Route::put('/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update'); // Actualizar una factura
+    Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy'); // Eliminar una factura
+});
+
+//Rutas de opinion
+Route::prefix('opinions')->group(function () {
+    Route::get('/', [OpinionController::class, 'index'])->name('opinions.index'); // Mostrar todas las opiniones
+    Route::post('/product/{product}', [OpinionController::class, 'store'])->name('opinions.store'); // Crear una nueva opinión
+    Route::get('/{opinion}', [OpinionController::class, 'show'])->name('opinions.show'); // Mostrar una opinión específica
+    Route::delete('/{opinion}', [OpinionController::class, 'destroy'])->name('opinions.destroy'); // Eliminar una opinión
+});
+
+//Rutas de ordenes
+Route::prefix('orders')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('orders.index'); // Mostrar todas las órdenes
+    Route::post('/', [OrderController::class, 'store'])->name('orders.store'); // Crear una nueva orden
+    Route::get('/{order}', [OrderController::class, 'show'])->name('orders.show'); // Mostrar una orden específica
+    Route::put('/{order}', [OrderController::class, 'update'])->name('orders.update'); // Actualizar una orden
+    Route::delete('/{order}', [OrderController::class, 'destroy'])->name('orders.destroy'); // Eliminar una orden
+});
+
+
+
+
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);

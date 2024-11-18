@@ -46,10 +46,10 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" style="background-color: rgb(0, 1, 1 )">
-                    <a href="index.html" class="logo">
-                        <img src="{{ asset('') }}assets/images/LogoNegro.png" alt="navbar brand" width="160"
-                            height="60" />
-                    </a>
+
+                    <img src="{{ asset('') }}assets/images/LogoNegro.png" alt="navbar brand" width="160"
+                        height="60" />
+
                     <div class="nav-toggle">
                         <button class="btn btn-toggle toggle-sidebar">
                             <i class="gg-menu-right"></i>
@@ -197,10 +197,6 @@
                             </div>
                         </nav>
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                            <li class="nav-item topbar-icon dropdown hidden-caret" style="margin-right: 35px;">
-                                <i class="fas fa-users"></i>
-                                Quienes somos
-                            </li>
                             <li class="nav-item topbar-icon dropdown hidden-caret" style="margin-right: 35px;">
                                 <a href="{{ route('categories.index') }}" class="nav-link">
                                     <i class="fas fa-folder"></i>

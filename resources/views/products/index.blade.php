@@ -29,11 +29,6 @@
                             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="100">
                         </td>
                         <td>
-                            <!-- Botón de Agregar con ícono -->
-                            <a href="{{ route('products.create') }}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-plus"></i>
-                            </a>
-
                             <!-- Botón de Editar con ícono -->
                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
