@@ -28,43 +28,19 @@ Route::middleware('auth')->group(function () {
   Route::resource('products', ProductsController::class);
   Route::resource('categories', CategoryController::class);
  
- //Rutas de carrito
- Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
- Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
- Route::put('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
- Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+ //Ruta de carritos
+ Route::resource('carts', CartController::class);
 
+ //Ruta de facturas
+Route::resource('invoices', InvoiceController::class);
+
+//Ruta de opiniones
+Route::resource('opinions', OpinionController::class);
+
+//Ruta de ordenes
+Route::resource('orders', OrderController::class);
 
 });
-
-
-//Rutas de factura
-Route::prefix('invoices')->group(function () {
-    Route::get('/', [InvoiceController::class, 'index'])->name('invoices.index'); // Mostrar todas las facturas
-    Route::post('/', [InvoiceController::class, 'store'])->name('invoices.store'); // Crear una nueva factura
-    Route::get('/{invoice}', [InvoiceController::class, 'show'])->name('invoices.show'); // Mostrar una factura específica
-    Route::put('/{invoice}', [InvoiceController::class, 'update'])->name('invoices.update'); // Actualizar una factura
-    Route::delete('/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy'); // Eliminar una factura
-});
-
-//Rutas de opinion
-Route::prefix('opinions')->group(function () {
-    Route::get('/', [OpinionController::class, 'index'])->name('opinions.index'); // Mostrar todas las opiniones
-    Route::post('/product/{product}', [OpinionController::class, 'store'])->name('opinions.store'); // Crear una nueva opinión
-    Route::get('/{opinion}', [OpinionController::class, 'show'])->name('opinions.show'); // Mostrar una opinión específica
-    Route::delete('/{opinion}', [OpinionController::class, 'destroy'])->name('opinions.destroy'); // Eliminar una opinión
-});
-
-//Rutas de ordenes
-Route::prefix('orders')->group(function () {
-    Route::get('/', [OrderController::class, 'index'])->name('orders.index'); // Mostrar todas las órdenes
-    Route::post('/', [OrderController::class, 'store'])->name('orders.store'); // Crear una nueva orden
-    Route::get('/{order}', [OrderController::class, 'show'])->name('orders.show'); // Mostrar una orden específica
-    Route::put('/{order}', [OrderController::class, 'update'])->name('orders.update'); // Actualizar una orden
-    Route::delete('/{order}', [OrderController::class, 'destroy'])->name('orders.destroy'); // Eliminar una orden
-});
-
-
 
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

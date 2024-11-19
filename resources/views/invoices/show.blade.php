@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Detalles de la Factura #{{ $invoice->id }}</h1>
-    <p>Fecha de Pago: {{ $invoice->payment_date }}</p>
-    <p>Método de Pago: {{ $invoice->payment_method }}</p>
-    <p>Estado: {{ $invoice->state }}</p>
-    <p>Carrito Asociado: #{{ $invoice->cart->id ?? 'N/A' }}</p>
+    <div class="container">
+        <h2>Factura ID: {{ $invoice->id }}</h2>
+        <p><strong>Fecha de Pago:</strong> {{ $invoice->payment_date }}</p>
+        <p><strong>Método de Pago:</strong> {{ $invoice->payment_method }}</p>
+        <p><strong>Estado:</strong> {{ $invoice->state }}</p>
+        <a href="{{ route('invoices.index') }}" class="btn btn-secondary">Volver</a>
+    </div>
 @endsection

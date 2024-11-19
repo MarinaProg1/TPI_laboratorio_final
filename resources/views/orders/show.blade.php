@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Detalles de la Orden #{{ $order->id }}</h1>
-    <p>Fecha de Orden: {{ $order->order_date }}</p>
-    <p>Estado: {{ $order->state }}</p>
-    <p>Usuario: {{ $order->user->name ?? 'N/A' }}</p>
-    <p>Carrito Asociado: #{{ $order->cart->id ?? 'N/A' }}</p>
+    <div class="container">
+        <h2>Orden ID: {{ $order->id }}</h2>
+        <p><strong>Fecha de Orden:</strong> {{ $order->order_date }}</p>
+        <p><strong>Estado:</strong> {{ $order->state }}</p>
+        <p><strong>Usuario:</strong> {{ $order->user->name ?? 'N/A' }}</p>
+        <a href="{{ route('orders.index') }}" class="btn btn-secondary">Volver</a>
+    </div>
 @endsection
