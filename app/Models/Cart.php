@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
@@ -19,4 +19,16 @@ class Cart extends Model
     {
         return $this->belongsToMany(Product::class, 'cart_product');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($cart) {
+            if (!$cart->user_id) {
+                $cart->user_id = Auth::id(); // Asignar el user_id del usuario autenticado
+            }
+        });
+    }
 }
+
+

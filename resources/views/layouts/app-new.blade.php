@@ -67,13 +67,20 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-secondary">
-                        <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
-                                <i class="fas fa-home" style="color: orange;"></i>
-                                <p>Inicio</p>
-                            </a>
-                        </li>
-
+                        @if (auth()->check() && auth()->user()->role == 'admin')
+                            <li class="nav-item active">
+                                <a href="{{ route('categories.index') }}" class="nav-link">
+                                    <i class="fas fa-home" style="color: orange;"></i>
+                                    <p>ABM categorias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item active">
+                                <a href="{{ route('products.index') }}" class="nav-link">
+                                    <i class="fas fa-home" style="color: orange;"></i>
+                                    <p>ABM productos</p>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
 
                             <a data-bs-toggle="collapse" href="{{ route('products.index') }}">
@@ -81,77 +88,14 @@
                                 <p>Lista de productos</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="maps">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="maps/googlemaps.html">
-                                            <span class="sub-item">Nuevos productos</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="maps/jsvectormap.html">
-                                            <span class="sub-item">Todos los procutos</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
-
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#submenu">
-                                <i class="fas fa-folder" style="color: orange;"></i>
-                                <p>Categorias</p>
+                            <a href="{{ route('carts.index') }}" class="nav-link">
+                                <i class="fas fa-shopping-cart" styte="color: orange;"></i>
+                                <p>Carrito</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="submenu">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a data-bs-toggle="collapse" href="#subnav1">
-                                            <span class="sub-item">categoria 1</span>
-                                            <span class="caret"></span>
-                                        </a>
-                                        <div class="collapse" id="subnav1">
-                                            <ul class="nav nav-collapse subnav">
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">categoria 2</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">categoria 3</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a data-bs-toggle="collapse" href="#subnav2">
-                                            <span class="sub-item">Level 1</span>
-                                            <span class="caret"></span>
-                                        </a>
-                                        <div class="collapse" id="subnav2">
-                                            <ul class="nav nav-collapse subnav">
-                                                <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Level 2</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span class="sub-item">Level 1</span>
-                                        </a>
-                                    </li>
-                                </ul>
-
-
-                            </div>
                         </li>
-
-
 
                     </ul>
                 </div>
@@ -197,12 +141,7 @@
                             </div>
                         </nav>
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                            <li class="nav-item topbar-icon dropdown hidden-caret" style="margin-right: 35px;">
-                                <a href="{{ route('categories.index') }}" class="nav-link">
-                                    <i class="fas fa-folder"></i>
-                                    Categorias
-                                </a>
-                            </li>
+
                             <li class="nav-item topbar-icon dropdown hidden-caret" style="margin-right: 35px;">
                                 <a href="{{ route('products.index') }}" class="nav-link">
                                     <i class="fas fa-tag"></i>
@@ -210,7 +149,7 @@
                                 </a> <!-- Cierre de la etiqueta <a> agregado aquí -->
                             </li>
                             <li class="nav-item topbar-icon dropdown hidden-caret" style="margin-right: 35px;">
-                                <a href="{{ route('cart.index') }}" class="nav-link">
+                                <a href="{{ route('carts.index') }}" class="nav-link">
                                     <i class="fas fa-shopping-cart"></i>
                                     Carrito
                                 </a>
@@ -251,8 +190,6 @@
                                 @endif
                             </li>
                         </ul>
-
-
                     </div>
                 </nav>
                 <!-- End Navbar -->

@@ -2,33 +2,63 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mb-3">Lista de carritos</h2>
-        <a href="{{ route('carts.create') }}" class="btn btn-success mb-3">Agregar nuevo carrito</a>
+        <h1>Carritos</h1>
 
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Estado</th>
-                    <th>Usuario</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($carts as $cart)
+        {{-- Verificar si hay datos para mostrar --}}
+        @if (isset($carts) && $carts instanceof \Illuminate\Support\Collection && $carts->isNotEmpty())
+            {{-- Es una colección con elementos --}}
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>{{ $cart->id }}</td>
-                        <td>{{ $cart->state }}</td>
-                        <td>{{ $cart->user->name ?? 'N/A' }}</td>
+                        <th>ID</th>
+                        <th>Estado</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($carts as $cart)
+                        <tr>
+                            <td>{{ $cart->id }}</td>
+                            <td>{{ $cart->state }}</td>
+                            <td>{{ $cart->user->name ?? 'N/A' }}</td>
+                            <td>
+                                <a href="{{ route('carts.edit', $cart->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <form action="{{ route('carts.destroy', $cart->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @elseif (isset($carts) && $carts instanceof \App\Models\Cart)
+            {{-- Es un solo objeto Cart --}}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Estado</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $carts->id }}</td>
+                        <td>{{ $carts->state }}</td>
+                        <td>{{ $carts->user->name ?? 'N/A' }}</td>
                         <td>
-                            <a href="{{ route('carts.edit', $cart->id) }}" class="btn btn-warning btn-sm">
+                            <a href="{{ route('carts.edit', $carts->id) }}" class="btn btn-warning btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <form action="{{ route('carts.destroy', $cart->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('carts.destroy', $carts->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -37,12 +67,11 @@
                             </form>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center">No hay carritos disponibles.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        @else
+            {{-- No hay datos disponibles --}}
+            <div class="alert alert-info">No hay carritos disponibles.</div>
+        @endif
     </div>
 @endsection
