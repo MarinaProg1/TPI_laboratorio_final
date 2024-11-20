@@ -21,7 +21,7 @@ class Product extends Model
     }
     public function carts()
     {
-        return $this->belongsToMany(Cart::class, 'product_cart')
+        return $this->belongsToMany(Cart::class, 'product_carts')
                     ->withPivot('quantity') // Agrega esto si tienes el campo cantidad
                     ->withTimestamps();
     }

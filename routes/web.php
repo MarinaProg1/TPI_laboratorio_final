@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
 //Rutas de carrito
 Route::resource('carts', CartController::class);
 Route::post('/carts/add/{productId}', [CartController::class, 'add'])->name('carts.add');
+Route::get('cart/checkout', [CartController::class, 'checkout'])->name('carts.checkout');
+Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('carts.processCheckout');
 
  //Ruta de facturas
 Route::resource('invoices', InvoiceController::class);

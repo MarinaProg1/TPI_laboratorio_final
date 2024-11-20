@@ -2,75 +2,58 @@
 
 @section('content')
     <div class="container">
-        <h1>Carritos</h1>
+        <h1>Carrito</h1>
 
-        {{-- Verificar si hay datos para mostrar --}}
-        @if (isset($carts) && $carts instanceof \Illuminate\Support\Collection && $carts->isNotEmpty())
-            {{-- Es una colección con elementos --}}
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Estado</th>
-                        <th>Usuario</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($carts as $cart)
-                        <tr>
-                            <td>{{ $cart->id }}</td>
-                            <td>{{ $cart->state }}</td>
-                            <td>{{ $cart->user->name ?? 'N/A' }}</td>
-                            <td>
-                                <a href="{{ route('carts.edit', $cart->id) }}" class="btn btn-warning btn-sm">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>
-                                <form action="{{ route('carts.destroy', $cart->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @elseif (isset($carts) && $carts instanceof \App\Models\Cart)
-            {{-- Es un solo objeto Cart --}}
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Estado</th>
-                        <th>Usuario</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $carts->id }}</td>
-                        <td>{{ $carts->state }}</td>
-                        <td>{{ $carts->user->name ?? 'N/A' }}</td>
-                        <td>
-                            <a href="{{ route('carts.edit', $carts->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <form action="{{ route('carts.destroy', $carts->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        {{-- Verificar si hay carrito y productos --}}
+        @if (isset($cart) && $cart instanceof \App\Models\Cart)
+            {{-- Mostrar detalles del carrito --}}
+            <h3>Carrito ID: {{ $cart->id }}</h3>
+            <p>Estado: {{ $cart->state }}</p>
+            <p>Usuario: {{ $cart->user->name ?? 'N/A' }}</p>
+
+            {{-- Campo oculto para el ID del carrito --}}
+            <form action="{{ route('carts.checkout') }}" method="POST">
+                @csrf
+                <input type="hidden" name="cart_id" value="{{ $cart->id }}">
+
+                {{-- Verificar si hay productos en el carrito --}}
+                @if ($products->isNotEmpty())
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($products as $product)
+                                <tr>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->pivot->quantity }}</td>
+                                    <!-- Muestra la cantidad en la tabla intermedia -->
+                                    <td>{{ $product->price }}</td>
+                                    <td>{{ $product->price * $product->pivot->quantity }}</td> <!-- Muestra el total -->
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    {{-- Botones para seguir comprando y finalizar la compra --}}
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">
+                            Seguir comprando
+                        </a>
+                        <button type="submit" class="btn btn-success btn-sm">
+                            Finalizar compra
+                        </button>
+                    </div>
+                @else
+                    <div class="alert alert-info">Tu carrito está vacío.</div>
+                @endif
+            </form>
         @else
-            {{-- No hay datos disponibles --}}
             <div class="alert alert-info">No hay carritos disponibles.</div>
         @endif
     </div>
