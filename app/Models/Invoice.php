@@ -11,11 +11,9 @@ class Invoice extends Model
         'payment_method',
         'state',
     ];
-    protected $table= 'invoices';
 
     public function cart()
     {
         return $this->belongsTo(Cart::class);
     }
-
 }

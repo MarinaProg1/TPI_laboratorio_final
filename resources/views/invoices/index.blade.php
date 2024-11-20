@@ -2,13 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mb-3">Lista de facturas</h2>
-        <a href="{{ route('invoices.create') }}" class="btn btn-success mb-3">Agregar nueva factura</a>
-
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
+        <h1>Facturas</h1>
+        <a href="{{ route('invoices.create') }}" class="btn btn-primary mb-3">Nueva Factura</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -16,34 +11,27 @@
                     <th>Fecha de Pago</th>
                     <th>Método de Pago</th>
                     <th>Estado</th>
-                    <th>Acción</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($invoices as $invoice)
+                @foreach ($invoices as $invoice)
                     <tr>
                         <td>{{ $invoice->id }}</td>
                         <td>{{ $invoice->payment_date }}</td>
                         <td>{{ $invoice->payment_method }}</td>
                         <td>{{ $invoice->state }}</td>
                         <td>
-                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
+                            <a href="{{ route('invoices.show', $invoice->id) }}" class="btn btn-info btn-sm">Ver</a>
+                            <a href="{{ route('invoices.edit', $invoice->id) }}" class="btn btn-warning btn-sm">Editar</a>
                             <form action="{{ route('invoices.destroy', $invoice->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                <button class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="5" class="text-center">No hay facturas disponibles.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>

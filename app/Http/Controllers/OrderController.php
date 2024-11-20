@@ -5,63 +5,75 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Cart;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    // Mostrar todas las órdenes
     public function index()
     {
-        $orders = Order::with(['user', 'cart'])->get();
-        return view('orders.index', ['orders' => $orders]);
+        $orders = Order::with('user', 'cart')->get();
+        return view('orders.index', compact('orders'));
     }
 
-    // Crear una nueva orden
+    public function show($id)
+    {
+        $order = Order::with('user', 'cart')->findOrFail($id);
+        return view('orders.show', compact('order'));
+    }
+    
+    public function create()
+    {
+        $carts = Cart::where('state', 'completed')->get(); 
+        return view('orders.create', compact('carts'));
+    }
+
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'order_date' => 'required|date',
             'state' => 'required|string',
             'cart_id' => 'required|exists:carts,id',
         ]);
 
-        $order = new Order($validatedData);
-        $order->user_id = Auth::id(); // Asocia la orden al usuario autenticado
-        $order->save();
-
-        // Asocia el carrito con la orden
-        $cart = Cart::findOrFail($validatedData['cart_id']);
-        $cart->order()->associate($order);
-        $cart->save();
+        $order = Order::create([
+            'order_date' => $request->order_date,
+            'state' => $request->state,
+            'cart_id' => $request->cart_id,
+            'user_id' => auth()->id(), 
+        ]);
 
         return redirect()->route('orders.index')->with('success', 'Orden creada con éxito.');
     }
 
-    // Mostrar los detalles de una orden específica
-    public function show(Order $order)
+    public function edit($id)
     {
-        return view('orders.show', ['order' => $order]);
+        $order = Order::findOrFail($id);
+        $carts = Cart::where('state', 'completed')->get(); 
+        return view('orders.edit', compact('order', 'carts'));
     }
 
-    // Actualizar una orden existente
-    public function update(Request $request, Order $order)
+
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $order = Order::findOrFail($id);
+
+        $request->validate([
             'order_date' => 'required|date',
             'state' => 'required|string',
         ]);
 
-        $order->update($validatedData);
+        $order->update([
+            'order_date' => $request->order_date,
+            'state' => $request->state,
+        ]);
 
-        return redirect()->route('orders.show', $order)->with('success', 'Orden actualizada con éxito.');
+        return redirect()->route('orders.index')->with('success', 'Orden actualizada con éxito.');
     }
 
-    // Eliminar una orden
-    public function destroy(Order $order)
+    public function destroy($id)
     {
+        $order = Order::findOrFail($id);
         $order->delete();
 
         return redirect()->route('orders.index')->with('success', 'Orden eliminada con éxito.');
     }
 }
-

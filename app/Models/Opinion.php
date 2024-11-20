@@ -12,8 +12,6 @@ class Opinion extends Model
         'date',
     ];
 
-    protected $table ='opinions';
-
     public function user()
     {
         return $this->belongsTo(User::class);

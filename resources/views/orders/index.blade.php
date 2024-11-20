@@ -2,46 +2,37 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mb-3">Lista de órdenes</h2>
-        <a href="{{ route('orders.create') }}" class="btn btn-success mb-3">Agregar nueva orden</a>
-
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-
+        <h1>Órdenes</h1>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Fecha de Orden</th>
+                    <th>Fecha</th>
                     <th>Estado</th>
-                    <th>Acción</th>
+                    <th>Usuario</th>
+                    <th>Carro Asociado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($orders as $order)
+                @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->order_date }}</td>
                         <td>{{ $order->state }}</td>
+                        <td>{{ $order->user->name ?? 'N/A' }}</td>
+                        <td>{{ $order->cart->id ?? 'N/A' }}</td>
                         <td>
-                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-warning btn-sm">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
+                            <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info btn-sm">Ver</a>
+                            <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-warning btn-sm">Editar</a>
                             <form action="{{ route('orders.destroy', $order->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
+                                <button class="btn btn-danger btn-sm">Eliminar</button>
                             </form>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center">No hay órdenes disponibles.</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
     </div>

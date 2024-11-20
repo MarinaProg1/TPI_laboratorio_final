@@ -5,48 +5,69 @@ namespace App\Http\Controllers;
 use App\Models\Opinion;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class OpinionController extends Controller
 {
-    // Mostrar todas las opiniones
     public function index()
     {
-        $opinions = Opinion::with(['user', 'product'])->get();
-        return view('opinions.index', ['opinions' => $opinions]);
+        $opinions = Opinion::with('user', 'product')->get();
+        return view('opinions.index', compact('opinions'));
     }
 
-    // Crear una nueva opinión para un producto específico
-    public function store(Request $request, Product $product)
+    public function show($id)
     {
-        $validatedData = $request->validate([
+        $opinion = Opinion::with('user', 'product')->findOrFail($id);
+        return view('opinions.show', compact('opinion'));
+    }
+
+    public function create()
+    {
+        $products = Product::all();
+        return view('opinions.create', compact('products'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'qualification' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:255',
+            'date' => 'required|date',
+            'product_id' => 'required|exists:products,id',
+        ]);
+
+        $opinion = new Opinion($request->all());
+        $opinion->user_id = auth()->id();
+        $opinion->save();
+
+        return redirect()->route('opinions.index')->with('success', 'Opinión creada con éxito.');
+    }
+
+    public function edit($id)
+    {
+        $opinion = Opinion::findOrFail($id);
+        $products = Product::all();
+        return view('opinions.edit', compact('opinion', 'products'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
             'qualification' => 'required|integer|min:1|max:5',
             'comment' => 'required|string|max:255',
             'date' => 'required|date',
         ]);
 
-        $opinion = new Opinion($validatedData);
-        $opinion->user_id = Auth::id(); // Asocia la opinión al usuario autenticado
-        $opinion->product_id = $product->id;
-        $opinion->save();
+        $opinion = Opinion::findOrFail($id);
+        $opinion->update($request->all());
 
-        return redirect()->route('opinions.index')->with('success', 'Opinión agregada con éxito.');
+        return redirect()->route('opinions.index')->with('success', 'Opinión actualizada con éxito.');
     }
 
-    // Mostrar una opinión específica
-    public function show(Opinion $opinion)
+    public function destroy($id)
     {
-        return view('opinions.show', ['opinion' => $opinion]);
-    }
+        $opinion = Opinion::findOrFail($id);
+        $opinion->delete();
 
-    // Eliminar una opinión
-    public function destroy(Opinion $opinion)
-    {
-        if (Auth::id() === $opinion->user_id) {
-            $opinion->delete();
-            return redirect()->route('opinions.index')->with('success', 'Opinión eliminada con éxito.');
-        }
-
-        return redirect()->route('opinions.index')->with('error', 'No tienes permiso para eliminar esta opinión.');
+        return redirect()->route('opinions.index')->with('success', 'Opinión eliminada con éxito.');
     }
 }
