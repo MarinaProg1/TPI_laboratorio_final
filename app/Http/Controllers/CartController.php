@@ -28,31 +28,45 @@ class CartController extends Controller
     return view('carts.index', compact('cart', 'products')); // Pasar el carrito y los productos a la vista
   }
 
-    
+ 
+  public function add(Request $request, $productId)
+{
+    // Obtener el producto
+    $product = Product::findOrFail($productId);
 
-    public function add(Request $request, $productId)
-    {
-        // Obtener el producto
-        $product = Product::findOrFail($productId);
+    // Obtener o crear el carrito para el usuario
+    $cart = Cart::firstOrCreate([
+        'user_id' => Auth::id(),
+        'state' => 'active',
+    ]);
 
-        // Obtener o crear el carrito para el usuario
-        $cart = Cart::firstOrCreate([
-            'user_id' => Auth::id(),
-            'state' => 'active',
-        ]);
+    // Verificar si el producto ya está en el carrito
+    $existingProduct = $cart->products()->where('products.id', $product->id)->first();
 
-        // Verificar si el producto ya está en el carrito
-        if ($cart->products()->where('products.id', $product->id)->exists()) {
-            // Si ya existe, podrías optar por aumentar la cantidad
-            return redirect()->route('carts.index')->with('info', 'El producto ya está en el carrito.');
-        }
+    // Calcular la cantidad total en el carrito
+    $currentQuantity = $existingProduct ? $existingProduct->pivot->quantity : 0;
 
-        // Agregar el producto al carrito (aumentar la cantidad si ya existe)
-        $cart->products()->attach($product->id, ['quantity' => 1]);
-
-        // Redirigir al carrito
-        return redirect()->route('carts.index')->with('success', 'Producto agregado al carrito.');
+    // Validar el stock
+    if ($currentQuantity + 1 > $product->stock) {
+        return redirect()->route('carts.index')->with('error', 'No hay suficiente stock disponible para este producto.');
     }
+
+    if ($existingProduct) {
+        // Si ya existe, aumentar la cantidad en 1
+        $cart->products()->updateExistingPivot($product->id, [
+            'quantity' => $currentQuantity + 1,
+        ]);
+    } else {
+        // Si no existe, agregarlo con una cantidad inicial de 1
+        $cart->products()->attach($product->id, ['quantity' => 1]);
+    }
+
+    // Redirigir al carrito
+    return redirect()->route('carts.index')->with('success', 'Producto agregado al carrito.');
+}
+
+
+   
 
     public function update(Request $request, $productId)
     {

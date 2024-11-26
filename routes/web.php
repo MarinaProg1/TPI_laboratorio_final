@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
   Route::resource('products', ProductsController::class);
   Route::resource('categories', CategoryController::class);
  
- 
+  
 //Rutas de carrito
 Route::resource('carts', CartController::class);
 Route::post('/carts/add/{productId}', [CartController::class, 'add'])->name('carts.add');

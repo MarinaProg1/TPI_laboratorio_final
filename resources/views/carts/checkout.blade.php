@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.app-new')
 @section('content')
     <div class="container">
         <h1>Checkout</h1>

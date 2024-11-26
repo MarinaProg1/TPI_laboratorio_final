@@ -142,13 +142,13 @@
                         </nav>
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
 
-                            <li class="nav-item topbar-icon dropdown hidden-caret" style="margin-right: 35px;">
+                            <li class="list-group-item">
                                 <a href="{{ route('products.index') }}" class="nav-link">
                                     <i class="fas fa-tag"></i>
                                     Productos
                                 </a> <!-- Cierre de la etiqueta <a> agregado aquí -->
                             </li>
-                            <li class="nav-item topbar-icon dropdown hidden-caret" style="margin-right: 35px;">
+                            <li class="list-group-item">
                                 <a href="{{ route('carts.index') }}" class="nav-link">
                                     <i class="fas fa-shopping-cart"></i>
                                     Carrito
