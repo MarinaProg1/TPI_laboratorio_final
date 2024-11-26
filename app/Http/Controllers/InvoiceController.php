@@ -3,61 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
-use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    // Mostrar todas las facturas
     public function index()
     {
-        $invoices = Invoice::with('cart')->get();
-        return view('invoices.index', ['invoices' => $invoices]);
+        $invoices = Invoice::all();
+        return view('invoices.index', compact('invoices'));
     }
 
-    // Crear una nueva factura
+    public function show($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        return view('invoices.show', compact('invoice'));
+    }
+
+    public function create()
+    {
+        return view('invoices.create');
+    }
+
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'cart_id' => 'required|exists:carts,id',
+        $request->validate([
             'payment_date' => 'required|date',
             'payment_method' => 'required|string',
             'state' => 'required|string',
         ]);
 
-        $invoice = Invoice::create([
-            'cart_id' => $validatedData['cart_id'],
-            'payment_date' => $validatedData['payment_date'],
-            'payment_method' => $validatedData['payment_method'],
-            'state' => $validatedData['state'],
-        ]);
+        Invoice::create($request->all());
 
         return redirect()->route('invoices.index')->with('success', 'Factura creada con éxito.');
     }
 
-    // Mostrar una factura específica
-    public function show(Invoice $invoice)
+    public function edit($id)
     {
-        return view('invoices.show', ['invoice' => $invoice]);
+        $invoice = Invoice::findOrFail($id);
+        return view('invoices.edit', compact('invoice'));
     }
 
-    // Actualizar una factura
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'payment_date' => 'required|date',
             'payment_method' => 'required|string',
             'state' => 'required|string',
         ]);
 
-        $invoice->update($validatedData);
+        $invoice = Invoice::findOrFail($id);
+        $invoice->update($request->all());
 
-        return redirect()->route('invoices.show', $invoice)->with('success', 'Factura actualizada con éxito.');
+        return redirect()->route('invoices.index')->with('success', 'Factura actualizada con éxito.');
     }
 
-    // Eliminar una factura
-    public function destroy(Invoice $invoice)
+    public function destroy($id)
     {
+        $invoice = Invoice::findOrFail($id);
         $invoice->delete();
 
         return redirect()->route('invoices.index')->with('success', 'Factura eliminada con éxito.');
