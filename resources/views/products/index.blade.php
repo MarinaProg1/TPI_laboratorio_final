@@ -21,7 +21,7 @@
                             <h5 class="card-title">{{ $product->name }}</h5>
                             <p class="card-text">{{ $product->description }}</p>
                             <h2 class="fs-4">Precio: ${{ number_format($product->price, 2) }}</h2>
-                            <a href="#" class="btn btn-primary">Ver más</a>
+                            <a href="{{ route('products.show', ['id' => $product->id]) }}">Ver Detalle</a>
                         </div>
                     </div>
 
@@ -37,16 +37,6 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
-                    @endif
-
-                    @if (auth()->check() && auth()->user()->role == 'user')
-                        <!-- Botón de agregar al carrito -->
-                        <form action="{{ route('carts.add', $product->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fas fa-cart-plus"></i>
                             </button>
                         </form>
                     @endif
