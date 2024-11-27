@@ -43,7 +43,8 @@
         <div class="sidebar" style="background-color: rgb(0, 1, 1)">
             <div class="sidebar-logo">
                 <div class="logo-header" style="background-color: rgb(0, 1, 1)">
-                    <img src="{{ asset('assets/images/LogoNegro.png') }}" alt="navbar brand" width="160" height="60" />
+                    <img src="{{ asset('assets/images/LogoNegro.png') }}" alt="navbar brand" width="160"
+                        height="60" />
                 </div>
             </div>
             <div class="sidebar-wrapper scrollbar-inner">
@@ -83,18 +84,22 @@
 
         <div class="main-panel">
             <!-- Navbar -->
-            <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" style="background-color: rgb(245, 176, 65)">
+            <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+                style="background-color: rgb(245, 176, 65)">
                 <div class="container-fluid">
                     <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                         <li class="list-group-item">
-                            <a href="{{ route('products.index') }}" class="nav-link"><i class="fas fa-tag"></i> Productos</a>
+                            <a href="{{ route('products.index') }}" class="nav-link"><i class="fas fa-tag"></i>
+                                Productos</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="{{ route('carts.index') }}" class="nav-link"><i class="fas fa-shopping-cart"></i> Carrito</a>
+                            <a href="{{ route('carts.index') }}" class="nav-link"><i class="fas fa-shopping-cart"></i>
+                                Carrito</a>
                         </li>
                         <li class="nav-item topbar-user dropdown hidden-caret">
                             @auth
-                                <a href="{{ route('dashboard') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70">
+                                <a href="{{ route('dashboard') }}"
+                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70">
                                     {{ Auth::user()->name }}
                                 </a>
                                 <form method="POST" action="{{ route('logout') }}" class="ml-3 d-inline">
@@ -104,9 +109,11 @@
                                     </button>
                                 </form>
                             @else
-                                <a href="{{ route('login') }}" class="nav-item topbar-icon dropdown hidden-caret"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
+                                <a href="{{ route('login') }}" class="nav-item topbar-icon dropdown hidden-caret"><i
+                                        class="fas fa-sign-in-alt"></i> Iniciar sesión</a>
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="nav-item topbar-icon dropdown hidden-caret"><i class="fas fa-user-plus"></i> Registro</a>
+                                    <a href="{{ route('register') }}" class="nav-item topbar-icon dropdown hidden-caret"><i
+                                            class="fas fa-user-plus"></i> Registro</a>
                                 @endif
                             @endauth
                         </li>
@@ -117,7 +124,8 @@
 
             <div class="container" style="background-color: rgb(245, 247, 230)">
                 <div class="page-inner">
-                    @yield('content') <!-- Esta es la sección donde se mostrará el contenido específico de cada vista -->
+                    @yield('content')
+                    <!-- Esta es la sección donde se mostrará el contenido específico de cada vista -->
                 </div>
             </div>
 
@@ -130,7 +138,8 @@
                         </ul>
                     </nav>
                     <div class="copyright">
-                        2024, made with <i class="fa fa-heart heart text-danger"></i> by <a href="http://www.themekita.com">Juan Cruz, Federico y Marina</a>
+                        2024, made with <i class="fa fa-heart heart text-danger"></i> by <a
+                            href="http://www.themekita.com">Juan Cruz, Federico y Marina</a>
                     </div>
                 </div>
             </footer>
@@ -144,4 +153,3 @@
 </body>
 
 </html>
-

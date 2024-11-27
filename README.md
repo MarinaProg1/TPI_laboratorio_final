@@ -14,18 +14,13 @@ Gestión de carrito de compras y realización de pedidos.
 
 ## El grupo del proyecto esta integrado por :
 
-Juan Cruz Correa
-
-Federico Vicentin
-
-Marina Lopez
+Juan Cruz Correa, Federico Vicentin y Marina Lopez
 
 ## Funcionalidades principales:
 
 Gestión de usuarios:
 
 Registro seguro de usuarios: Los datos se almacenan y manejan con prácticas seguras, incluyendo encriptación de contraseñas.
-
 Autenticación de usuarios: Los usuarios pueden iniciar sesión para acceder a funcionalidades personalizadas.
 
 ## Roles de usuario:
