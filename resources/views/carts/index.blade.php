@@ -108,5 +108,7 @@
         @else
             <div class="alert alert-info">No hay carritos disponibles.</div>
         @endif
-    </div>
-@endsection
+
+
+
+    @endsection

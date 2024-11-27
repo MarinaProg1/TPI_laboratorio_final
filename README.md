@@ -1,66 +1,96 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### UTN Online
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descripción:
 
-## About Laravel
+Este proyecto es una tienda online desarrollada como trabajo académico para la facultad. La plataforma permite a los usuarios navegar por diversas categorías de productos, añadir artículos al carrito de compras y realizar pedidos de manera sencilla.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+El objetivo principal del proyecto es aplicar conceptos de desarrollo web, bases de datos y gestión de información en un entorno realista, simulando el funcionamiento de un comercio electrónico.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Características principales:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Exploración de productos organizados por categorías.
+Gestión de carrito de compras y realización de pedidos.
+Tecnologías utilizadas:
 
-## Learning Laravel
+Frontend: HTML, CSS, JavaScript.
+Backend: Laravel / PHP.
+Base de datos: MySQL.
+Control de versiones: Git y GitHub.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## El grupo del proyecto esta integrado por :
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Juan Cruz Correa
+Federico Vicentin
+Marina Lopez
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Funcionalidades principales:
 
-## Laravel Sponsors
+Gestión de usuarios:
+Registro seguro de usuarios: Los datos se almacenan y manejan con prácticas seguras, incluyendo encriptación de contraseñas.
+Autenticación de usuarios: Los usuarios pueden iniciar sesión para acceder a funcionalidades personalizadas.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Roles de usuario:
 
-### Premium Partners
+Usuarios regulares: Pueden navegar, agregar productos al carrito y realizar compras.
+Administradores: Acceden a funcionalidades adicionales como el ABM (Alta, Baja, Modificación) de productos y administración de categorías.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Funcionalidades para usuarios:
 
-## Contributing
+Vista de productos:
+Listado completo de productos disponibles.
+Filtros por categorías para facilitar la búsqueda.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Carrito de compras:
+Agregar productos al carrito.
+Modificar la cantidad de productos seleccionados directamente desde el carrito.
+Eliminar productos del carrito si así lo desean.
+Visualización del total acumulado de la compra en tiempo real.
 
-## Code of Conduct
+## Funcionalidades para administradores:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+ABM de productos: Los administradores pueden gestionar el catálogo, agregando, editando o eliminando productos.
+Gestión de categorías: Los administradores pueden administrar las categorías disponibles para los productos.
 
-## Security Vulnerabilities
+### Configuración del proyecto
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Requisitos previos:
 
-## License
+PHP >= 8.x
+Composer instalado
+MySQL o cualquier base de datos compatible
+Node.js
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Clonar el repositorio:
+
+git clone https://github.com/MarinaProg1/TPI_laboratorio_final.git
+
+## Instalar las dependencias:
+
+composer install
+npm install
+npm run dev
+
+## Configurar el entorno:
+
+cp .env.example .env
+
+### Ejecutar migraciones y seeders:
+
+php artisan migrate --seed
+Nota: Los seeders crean ejemplos de usuarios comunes y un administrador con las siguientes credenciales:
+Email del administrador:adminUtn@gmail.com
+Contraseña:123456
+
+Ejemplo de un usuario comun:
+
+Email del administrador:usuarioUno@gmail.com
+Contraseña:123456
+
+### Hacer accesibles las imágenes:
+
+Ejecuta el comando para crear el enlace simbólico entre el directorio de almacenamiento y la carpeta pública:
+php artisan storage:link
+
+## Objetivo del proyecto
+
+El objetivo principal de este proyecto es aplicar los conceptos aprendidos en el curso para desarrollar una aplicación web moderna que integre buenas prácticas de programación, diseño responsivo y funcionalidades de e-commerce.
