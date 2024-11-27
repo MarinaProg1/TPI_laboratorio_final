@@ -1,4 +1,4 @@
-### UTN Online
+### UTN Tienda Online
 
 ## Descripción:
 
@@ -11,16 +11,6 @@ El objetivo principal del proyecto es aplicar conceptos de desarrollo web, bases
 Exploración de productos organizados por categorías.
 
 Gestión de carrito de compras y realización de pedidos.
-
-Tecnologías utilizadas:
-
-Frontend: HTML, CSS, JavaScript.
-
-Backend: Laravel / PHP.
-
-Base de datos: MySQL.
-
-Control de versiones: Git y GitHub.
 
 ## El grupo del proyecto esta integrado por :
 
@@ -103,6 +93,16 @@ Contraseña:123456
 Ejecuta el comando para crear el enlace simbólico entre el directorio de almacenamiento y la carpeta pública:
 
 php artisan storage:link
+
+## Tecnologías utilizadas:
+
+Frontend: HTML, CSS, JavaScript.
+
+Backend: Laravel / PHP.
+
+Base de datos: MySQL.
+
+Control de versiones: Git y GitHub.
 
 ## Objetivo del proyecto
 

@@ -44,6 +44,8 @@ Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name
 Route::get('cart/checkout', [CartController::class, 'checkout'])->name('carts.checkout');
 Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('carts.processCheckout');
 
+// Rutas de categorías.
+
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
