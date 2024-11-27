@@ -10,6 +10,8 @@ class Opinion extends Model
         'qualification',
         'comment',
         'date',
+        'user_id',
+        'product_id',
     ];
 
     public function user()

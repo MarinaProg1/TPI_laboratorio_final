@@ -21,7 +21,7 @@
                     <p class="card-text">{{ $product->description }}</p>
                     <h4 class="card-title">{{ "$" . number_format($product->price, 2, ',', '.') }}</h4>
 
-                    <h4 class="card-title">Cantidad diponible:{{ $product->stock }}</h4></br></br>
+                    <h4 class="card-title">Stock diponible:{{ $product->stock }}</h4></br></br>
 
                     @if (auth()->check() && auth()->user()->role == 'user')
                         <!-- Botón de agregar al carrito -->
@@ -34,6 +34,23 @@
                             </button>
                         </form>
                     @endif
+
+                    <!-- Mostrar opiniones -->
+                    <div class="mt-4">
+                        <h5>Opiniones</h5>
+                        @forelse ($product->opinions as $opinion)
+                            <div class="opinion">
+                                <strong>{{ $opinion->user->name }}</strong>
+                                <p>Calificación: {{ $opinion->qualification }} / 5</p>
+                                <p>{{ $opinion->comment }}</p>
+                                <small>Fecha: {{ \Carbon\Carbon::parse($opinion->date)->format('d/m/Y') }}</small>
+                            </div>
+                            <hr>
+                        @empty
+                            <p>No hay opiniones para este producto.</p>
+                        @endforelse
+                    </div>
+
 
                 </div>
             </div>

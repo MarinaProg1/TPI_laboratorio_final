@@ -34,21 +34,29 @@ Route::middleware('auth')->group(function () {
     Route::put('/products/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
     Route::get('/products/{id}', [ProductsController::class, 'show'])->name('products.show');
- 
-  Route::resource('categories', CategoryController::class);
- 
+    Route::get('/products/category/{categoryId}', [ProductsController::class, 'productsByCategory'])->name('products.byCategory');
+
+
   
 //Rutas de carrito
 Route::resource('carts', CartController::class);
 Route::post('/carts/add/{productId}', [CartController::class, 'add'])->name('carts.add');
+Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('carts.remove');
 Route::get('cart/checkout', [CartController::class, 'checkout'])->name('carts.checkout');
 Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('carts.processCheckout');
 
+Route::resource('categories', CategoryController::class);
  //Ruta de facturas
 Route::resource('invoices', InvoiceController::class);
 
 //Ruta de opiniones
-Route::resource('opinions', OpinionController::class);
+Route::get('/opinions', [OpinionController::class, 'index'])->name('opinions.index');
+Route::get('/opinions/{id}', [OpinionController::class, 'show'])->name('opinions.show');
+Route::get('/opinions/create', [OpinionController::class, 'create'])->name('opinions.create');
+Route::post('/opinions', [OpinionController::class, 'store'])->name('opinions.store');
+Route::get('/opinions/{id}/edit', [OpinionController::class, 'edit'])->name('opinions.edit');
+Route::put('/opinions/{id}', [OpinionController::class, 'update'])->name('opinions.update');
+Route::delete('/opinions/{id}', [OpinionController::class, 'destroy'])->name('opinions.destroy');
 
 //Ruta de ordenes
 Route::resource('orders', OrderController::class);

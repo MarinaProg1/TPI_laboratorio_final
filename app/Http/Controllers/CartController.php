@@ -131,5 +131,23 @@ class CartController extends Controller
 
     return redirect()->route('carts.index')->with('success', 'Compra realizada con éxito.');
 }
+public function remove($productId)
+{
+    $cart = Cart::where('user_id', Auth::id())
+                ->where('state', 'active')
+                ->first();
+
+    if (!$cart) {
+        return redirect()->route('carts.index')->with('error', 'No tienes un carrito activo.');
+    }
+    if ($cart->products()->where('products.id', $productId)->exists()) {
+    
+        $cart->products()->detach($productId);
+
+        return redirect()->route('carts.index')->with('success', 'Producto eliminado del carrito.');
+    } else {
+        return redirect()->route('carts.index')->with('error', 'El producto no está en el carrito.');
+    }
+}
 
 }

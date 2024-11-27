@@ -10,6 +10,7 @@ class Invoice extends Model
         'payment_date',
         'payment_method',
         'state',
+      
     ];
 
     public function cart()

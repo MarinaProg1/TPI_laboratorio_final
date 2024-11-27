@@ -8,10 +8,20 @@ use App\Models\Category;
 
 class ProductsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-        return view('products.index', compact('products'));
+        $categories = Category::all();
+        $categoryId = $request->input('category_id');
+        
+        $products = Product::query();
+
+        if ($categoryId) {
+            $products = $products->where('category_id', $categoryId);
+        }
+
+        $products = $products->get();
+
+        return view('products.index', compact('products', 'categories'));
     }
 
     public function create()
@@ -22,7 +32,7 @@ class ProductsController extends Controller
 
     public function store(Request $request)
 {
-    // Validar los datos del formulario
+   
     $validated = $request->validate([
         'name' => 'required|string|max:255|unique:products,name',
         'price' => 'required|numeric',
@@ -37,14 +47,13 @@ class ProductsController extends Controller
         $imagePath = $request->file('image')->store('images', 'public');
     }
 
-    // Crear y guardar el producto
     $product = Product::create([
         'name' => $validated['name'],
         'price' => $validated['price'],
         'description' => $validated['description'],
         'category_id' => $validated['category_id'],
         'stock' => $validated['stock'],
-        'image' => $imagePath, // Guarda la ruta relativa de la imagen
+        'image' => $imagePath, 
     ]);
 
     // Redirigir con mensaje de éxito
@@ -54,19 +63,19 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
-        $product = Product::findOrFail($id); // Busca el producto o lanza un error 404
+        $product = Product::findOrFail($id); 
         return view('products.edit', compact('product'));
     }
 
     public function update(Request $request, $id)
     {
-        // Validar los datos del formulario
+        
         $request->validate([
             'name' => 'required|string|max:255|unique:products,name',
             'price' => 'required|numeric',
             'description' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'stock' => 'required|integer|min:0', // Validar el campo 'stock'
+            'stock' => 'required|integer|min:0', 
         ]);
 
         $product = Product::findOrFail($id);
@@ -77,13 +86,13 @@ class ProductsController extends Controller
             $product->image = $imagePath;
         }
 
-        // Actualizar los datos del producto
+
         $product->update([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
-            'stock' => $request->stock, // Actualizar el valor de 'stock'
-            'image' => $product->image, // Mantener la imagen si no se sube una nueva
+            'stock' => $request->stock, 
+            'image' => $product->image, 
         ]);
 
         return redirect()->route('products.index')->with('success', 'Producto actualizado correctamente');
@@ -99,8 +108,7 @@ class ProductsController extends Controller
 
     public function show($id)
     {
-        $product = Product::find($id); 
-        
+        $product = Product::with('opinions.user')->find($id); 
         if (!$product) {
             return redirect()->route('products.index')->with('error', 'Producto no encontrado');
         }

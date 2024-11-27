@@ -42,20 +42,22 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($id);
         return view('invoices.edit', compact('invoice'));
     }
-
+    
     public function update(Request $request, $id)
     {
         $request->validate([
-            'payment_date' => 'required|date',
-            'payment_method' => 'required|string',
             'state' => 'required|string',
         ]);
-
+    
         $invoice = Invoice::findOrFail($id);
-        $invoice->update($request->all());
-
-        return redirect()->route('invoices.index')->with('success', 'Factura actualizada con éxito.');
+        $invoice->update([
+            'state' => $request->input('state'),
+        ]);
+    
+        return redirect()->route('invoices.index')->with('success', 'Estado de la factura actualizado con éxito.');
     }
+    
+   
 
     public function destroy($id)
     {

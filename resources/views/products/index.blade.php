@@ -1,6 +1,27 @@
 @extends('layouts.app-new')
 
 @section('content')
+    <form action="{{ route('products.index') }}" method="GET">
+        <div class="input-group mb-3">
+            <!-- Select para elegir categoría -->
+            <select name="category_id" class="form-control">
+                <option value="">Seleccionar categoría</option>
+                <option value="">Todos los productos</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            <!-- Botón de búsqueda -->
+            <button class="btn btn-outline-dark" type="submit">
+                <i class="fa fa-search search-icon"></i>
+            </button>
+        </div>
+    </form>
+
+
     <div class="container">
         <h2 class="mb-3">Productos</h2>
         @if (auth()->check() && auth()->user()->role == 'admin')

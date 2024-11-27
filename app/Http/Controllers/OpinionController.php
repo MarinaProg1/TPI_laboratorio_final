@@ -55,6 +55,8 @@ class OpinionController extends Controller
             'qualification' => 'required|integer|min:1|max:5',
             'comment' => 'required|string|max:255',
             'date' => 'required|date',
+             'user_id', 
+             'product_id',  
         ]);
 
         $opinion = Opinion::findOrFail($id);

@@ -18,7 +18,7 @@ class ProductSeeder extends Seeder
         $product->price = 35000;
         $product->stock = 10;
         $product->image ='images/Camisa.png';
-        $product->description ='Esta camisa de hombre combina elegancia y comodidad, ideal para cualquier ocasión, ya sea una salida casual o un evento formal.';
+        $product->description ='Elegancia y comodidad, ideal para cualquier ocasión, ya sea una salida casual o un evento formal.';
     
         $product->save();
 
@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
         $product->price = 500000;
         $product->stock = 10;
         $product->image ='images/iPhone.png';
-        $product->description ='La Notebook Banghó Max L5 i7 procesador Intel Core i7 de 12ª generación, 8GB de RAM y un disco SSD de 480GB, ideal para tareas exigentes y almacenamiento rápido. ';
+        $product->description ='La Notebook Banghó Max L5 i7 procesador Intel Core i7 de 12ª generación. ';
 
         $product->save(); 
 

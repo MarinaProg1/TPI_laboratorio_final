@@ -26,4 +26,8 @@ class Product extends Model
                     ->withTimestamps();
     }
 
+    public function opinions()
+    {
+        return $this->hasMany(Opinion::class);
+    }
 }
