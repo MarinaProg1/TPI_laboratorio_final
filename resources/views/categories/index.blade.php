@@ -1,14 +1,10 @@
 @extends('layouts.app-new')
 
 @section('content')
-
     <div class="container">
         <h2>Lista de Categorías</h2>
         <a href="{{ route('categories.create') }}" class="btn btn-success mb-3">Agregar Categoría</a>
 
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -41,5 +37,4 @@
             </tbody>
         </table>
     </div>
-    
 @endsection
