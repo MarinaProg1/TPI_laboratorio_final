@@ -45,15 +45,19 @@ Route::get('cart/checkout', [CartController::class, 'checkout'])->name('carts.ch
 Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('carts.processCheckout');
 
 Route::resource('categories', CategoryController::class);
- //Ruta de facturas
- Route::get('invoices', [InvoiceController::class, 'index'])->name('invoices.index');
- Route::get('invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
- Route::post('invoices', [InvoiceController::class, 'store'])->name('invoices.store');
- Route::get('invoices/{id}', [InvoiceController::class, 'show'])->name('invoices.show');
- Route::get('invoices/{id}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
- Route::put('invoices/{id}', [InvoiceController::class, 'update'])->name('invoices.update');
- Route::delete('invoices/{id}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
-//Ruta de opiniones
+
+
+// Rutas de facturas
+Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('invoices.show');
+Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+Route::get('/invoices/{id}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+Route::put('/invoices/{id}', [InvoiceController::class, 'update'])->name('invoices.update');
+Route::delete('/invoices/{id}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
+
+
+//Rutas de opiniones
 Route::get('/opinions', [OpinionController::class, 'index'])->name('opinions.index');
 Route::get('/opinions/{id}', [OpinionController::class, 'show'])->name('opinions.show');
 Route::get('/opinions/create', [OpinionController::class, 'create'])->name('opinions.create');
@@ -62,8 +66,15 @@ Route::get('/opinions/{id}/edit', [OpinionController::class, 'edit'])->name('opi
 Route::put('/opinions/{id}', [OpinionController::class, 'update'])->name('opinions.update');
 Route::delete('/opinions/{id}', [OpinionController::class, 'destroy'])->name('opinions.destroy');
 
-//Ruta de ordenes
-Route::resource('orders', OrderController::class);
+// Rutas de ordenes
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
+Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+
 
 });
 
