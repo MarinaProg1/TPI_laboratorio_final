@@ -98,7 +98,7 @@
                         Seguir comprando
                     </a>
 
-                    <a href="{{ route('invoices.store') }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('invoices.create') }}" class="btn btn-primary btn-sm">
                         Finalizar compra
                     </a>
                 </div>

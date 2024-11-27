@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         $product->name = 'Camisa de Jeans';
         $product->price = 35000;
         $product->stock = 10;
-        $product->image ='images/Camisa.png';
+        $product->image ='assets/images/Camisa.png';
         $product->description ='Elegancia y comodidad, ideal para cualquier ocasión, ya sea una salida casual o un evento formal.';
     
         $product->save();
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
         $product->name = 'Jeans mujer';
         $product->price = 65000;
         $product->stock = 10;
-        $product->image ='images/JeanMujer.png';
+        $product->image ='assets/images/jeans.png';
         $product->description = 'Jean mujer, diseñado para ofrecer un ajuste perfecto y resaltar tu figura.';
 
         $product->save();
@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
         $product->name = 'iPhone';
         $product->price = 500000;
         $product->stock = 10;
-        $product->image ='images/iPhone.png';
+        $product->image ='assets/images/celular.png';
         $product->description ='La Notebook Banghó Max L5 i7 procesador Intel Core i7 de 12ª generación. ';
 
         $product->save(); 
@@ -50,7 +50,7 @@ class ProductSeeder extends Seeder
         $product->name = 'Cartera';
         $product->price = 50000;
         $product->stock = 10;
-        $product->image ='images/Cartera.png';
+        $product->image ='assets/images/cartera.png';
         $product->description = 'Cartera de cuero de calidad';
 
         $product->save(); 
