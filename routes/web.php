@@ -34,8 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/products/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
     Route::get('/products/{id}', [ProductsController::class, 'show'])->name('products.show');
-    Route::get('/products/category/{categoryId}', [ProductsController::class, 'productsByCategory'])->name('products.byCategory');
-
+    
 
   
 //Rutas de carrito
@@ -47,8 +46,13 @@ Route::post('cart/checkout', [CartController::class, 'processCheckout'])->name('
 
 Route::resource('categories', CategoryController::class);
  //Ruta de facturas
-Route::resource('invoices', InvoiceController::class);
-
+ Route::get('invoices', [InvoiceController::class, 'index'])->name('invoices.index');
+ Route::get('invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
+ Route::post('invoices', [InvoiceController::class, 'store'])->name('invoices.store');
+ Route::get('invoices/{id}', [InvoiceController::class, 'show'])->name('invoices.show');
+ Route::get('invoices/{id}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
+ Route::put('invoices/{id}', [InvoiceController::class, 'update'])->name('invoices.update');
+ Route::delete('invoices/{id}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
 //Ruta de opiniones
 Route::get('/opinions', [OpinionController::class, 'index'])->name('opinions.index');
 Route::get('/opinions/{id}', [OpinionController::class, 'show'])->name('opinions.show');

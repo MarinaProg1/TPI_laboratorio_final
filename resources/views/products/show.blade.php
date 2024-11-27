@@ -50,8 +50,6 @@
                             <p>No hay opiniones para este producto.</p>
                         @endforelse
                     </div>
-
-
                 </div>
             </div>
         </div>

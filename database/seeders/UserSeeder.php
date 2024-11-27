@@ -22,5 +22,33 @@ class UserSeeder extends Seeder
 
         $user->save();
 
+        $user =new User();
+
+        $user->name = 'Usuario Prueba1';
+        $user->email = 'usuarioUno@gmail.com';
+        $user->password = '12345678';
+        $user->role = 'user';
+
+        $user->save();
+
+        $user =new User();
+
+        $user->name = 'Usuario Prueba2';
+        $user->email = 'usuarioDos@gmail.com';
+        $user->password = '12345678';
+        $user->role = 'user';
+
+        $user->save();
+
+        $user =new User();
+
+        $user->name = 'Usuario Prueba3';
+        $user->email = 'usuarioTres@gmail.com';
+        $user->password = '12345678';
+        $user->role = 'user';
+
+        $user->save();
+
+
     }
 }

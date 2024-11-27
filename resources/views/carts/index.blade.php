@@ -97,7 +97,7 @@
                         Seguir comprando
                     </a>
 
-                    <a href="{{ route('carts.checkout') }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('invoices.index') }}" class="btn btn-primary btn-sm">
                         Finalizar compra
                     </a>
                 </div>
