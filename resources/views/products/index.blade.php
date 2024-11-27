@@ -64,4 +64,10 @@
             @endforelse
         </div>
     </div>
+    <h5 class="card-title"> Categorias de productos</h5></br>
+    <div class="d-flex flex-wrap gap-3">
+        @foreach ($categories as $category)
+            <x-categories-com :category="$category" class="card-item" />
+        @endforeach
+    </div>
 @endsection

@@ -83,8 +83,7 @@
                             </li>
                         @endif
                         <li class="nav-item">
-
-                            <a data-bs-toggle="collapse" href="{{ route('products.index') }}">
+                            <a href="{{ route('products.index') }}" class="nav-link">
                                 <i class="fas fa-list"style="color: orange;"></i>
                                 <p>Lista de productos</p>
                                 <span class="caret"></span>
