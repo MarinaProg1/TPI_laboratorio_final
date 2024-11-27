@@ -4,7 +4,8 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Lista</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Lista</a></li>
+                <li class="breadcrumb-item"><a href="#">Detalle</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Carrito</li>
             </ol>
         </nav>
@@ -75,7 +76,7 @@
                                         style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">x</button>
                                     </form>
                                 </td>
                             </tr>
@@ -97,7 +98,7 @@
                         Seguir comprando
                     </a>
 
-                    <a href="{{ route('invoices.index') }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('invoices.store') }}" class="btn btn-primary btn-sm">
                         Finalizar compra
                     </a>
                 </div>

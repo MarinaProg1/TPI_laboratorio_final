@@ -39,9 +39,15 @@
                     <div class="mt-4">
                         <h5>Opiniones</h5>
                         @forelse ($product->opinions as $opinion)
-                            <div class="opinion">
+                            <div class="opinion mb-3">
                                 <strong>{{ $opinion->user->name }}</strong>
-                                <p>Calificación: {{ $opinion->qualification }} / 5</p>
+                                <p>
+                                    Calificación:
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <i
+                                            class="bi bi-star{{ $i <= $opinion->qualification ? '-fill text-warning' : '' }}"></i>
+                                    @endfor
+                                </p>
                                 <p>{{ $opinion->comment }}</p>
                                 <small>Fecha: {{ \Carbon\Carbon::parse($opinion->date)->format('d/m/Y') }}</small>
                             </div>
@@ -50,6 +56,7 @@
                             <p>No hay opiniones para este producto.</p>
                         @endforelse
                     </div>
+
                 </div>
             </div>
         </div>

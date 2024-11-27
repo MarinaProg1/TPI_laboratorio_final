@@ -31,12 +31,10 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <!-- Contenedor de productos -->
         <div class="row">
             @forelse ($products as $product)
-                <!-- Cada producto ocupa 6 columnas en pantallas medianas (2 por fila) -->
-                <div class="col-md-6 col-lg-4 mb-4"> <!-- Cambia 6 o 4 según cuántas columnas desees -->
-                    <div class="card" style="width: 100%;"> <!-- Asegura que ocupe toda la columna -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card" style="width: 100%;">
                         <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
@@ -47,12 +45,9 @@
                     </div>
 
                     @if (auth()->check() && auth()->user()->role == 'admin')
-                        <!-- Botón de Editar -->
                         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-
-                        <!-- Botón de Eliminar -->
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
