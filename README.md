@@ -9,86 +9,99 @@ El objetivo principal del proyecto es aplicar conceptos de desarrollo web, bases
 ## Características principales:
 
 Exploración de productos organizados por categorías.
+
 Gestión de carrito de compras y realización de pedidos.
+
 Tecnologías utilizadas:
 
 Frontend: HTML, CSS, JavaScript.
+
 Backend: Laravel / PHP.
+
 Base de datos: MySQL.
+
 Control de versiones: Git y GitHub.
 
 ## El grupo del proyecto esta integrado por :
 
 Juan Cruz Correa
+
 Federico Vicentin
+
 Marina Lopez
 
 ## Funcionalidades principales:
 
 Gestión de usuarios:
+
 Registro seguro de usuarios: Los datos se almacenan y manejan con prácticas seguras, incluyendo encriptación de contraseñas.
+
 Autenticación de usuarios: Los usuarios pueden iniciar sesión para acceder a funcionalidades personalizadas.
 
 ## Roles de usuario:
 
 Usuarios regulares: Pueden navegar, agregar productos al carrito y realizar compras.
+
 Administradores: Acceden a funcionalidades adicionales como el ABM (Alta, Baja, Modificación) de productos y administración de categorías.
 
 ## Funcionalidades para usuarios:
 
 Vista de productos:
+
 Listado completo de productos disponibles.
+
 Filtros por categorías para facilitar la búsqueda.
 
 Carrito de compras:
+
 Agregar productos al carrito.
+
 Modificar la cantidad de productos seleccionados directamente desde el carrito.
+
 Eliminar productos del carrito si así lo desean.
+
 Visualización del total acumulado de la compra en tiempo real.
 
 ## Funcionalidades para administradores:
 
 ABM de productos: Los administradores pueden gestionar el catálogo, agregando, editando o eliminando productos.
+
 Gestión de categorías: Los administradores pueden administrar las categorías disponibles para los productos.
 
 ### Configuración del proyecto
 
-## Requisitos previos:
-
-PHP >= 8.x
-Composer instalado
-MySQL o cualquier base de datos compatible
-Node.js
-
-## Clonar el repositorio:
-
-git clone https://github.com/MarinaProg1/TPI_laboratorio_final.git
-
 ## Instalar las dependencias:
 
 composer install
+
 npm install
+
 npm run dev
 
 ## Configurar el entorno:
 
 cp .env.example .env
 
-### Ejecutar migraciones y seeders:
+# Ejecutar migraciones y seeders:
 
 php artisan migrate --seed
+
 Nota: Los seeders crean ejemplos de usuarios comunes y un administrador con las siguientes credenciales:
+
 Email del administrador:adminUtn@gmail.com
+
 Contraseña:123456
 
 Ejemplo de un usuario comun:
 
 Email del administrador:usuarioUno@gmail.com
+
 Contraseña:123456
 
-### Hacer accesibles las imágenes:
+# Hacer accesibles las imágenes:
 
 Ejecuta el comando para crear el enlace simbólico entre el directorio de almacenamiento y la carpeta pública:
+
 php artisan storage:link
 
 ## Objetivo del proyecto
