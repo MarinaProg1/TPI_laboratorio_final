@@ -8,7 +8,7 @@ composer install
 
 cp .env.example .env
 
-Nota: solo hay que descomentar y colocar la contraseña correspindiente
+Nota: solo hay que descomentar y colocar la contraseña correspondiente
 
 php artisan key:generate
 
