@@ -1,5 +1,47 @@
 ### UTN Tienda Online
 
+### Configuración del proyecto
+
+## Instalar las dependencias:
+
+composer install
+
+cp .env.example .env
+
+Nota: solo hay que descomentar y colocar la contraseña correspindiente
+
+php artisan key:generate
+
+php artisan migrate --seed
+
+npm install
+
+npm run dev
+
+npm run build
+
+php artisan serve
+
+Nota: Los seeders crean ejemplos de usuarios comunes y un administrador con las siguientes credenciales:
+
+Email del administrador:adminUtn@gmail.com
+
+Contraseña:123456
+
+Ejemplo de un usuario comun:
+
+Email del administrador:usuarioUno@gmail.com
+
+Contraseña:123456
+
+# Hacer accesibles las imágenes:
+
+Ejecuta el comando para crear el enlace simbólico entre el directorio de almacenamiento y la carpeta pública:
+
+php artisan storage:link
+
+## Tecnologías utilizadas:
+
 ## Descripción:
 
 Este proyecto es una tienda online desarrollada como trabajo académico para la facultad. La plataforma permite a los usuarios navegar por diversas categorías de productos, añadir artículos al carrito de compras y realizar pedidos de manera sencilla.
@@ -52,44 +94,6 @@ Visualización del total acumulado de la compra en tiempo real.
 ABM de productos: Los administradores pueden gestionar el catálogo, agregando, editando o eliminando productos.
 
 Gestión de categorías: Los administradores pueden administrar las categorías disponibles para los productos.
-
-### Configuración del proyecto
-
-## Instalar las dependencias:
-
-composer install
-
-npm install
-
-npm run dev
-
-## Configurar el entorno:
-
-cp .env.example .env
-
-# Ejecutar migraciones y seeders:
-
-php artisan migrate --seed
-
-Nota: Los seeders crean ejemplos de usuarios comunes y un administrador con las siguientes credenciales:
-
-Email del administrador:adminUtn@gmail.com
-
-Contraseña:123456
-
-Ejemplo de un usuario comun:
-
-Email del administrador:usuarioUno@gmail.com
-
-Contraseña:123456
-
-# Hacer accesibles las imágenes:
-
-Ejecuta el comando para crear el enlace simbólico entre el directorio de almacenamiento y la carpeta pública:
-
-php artisan storage:link
-
-## Tecnologías utilizadas:
 
 Frontend: HTML, CSS, JavaScript.
 
