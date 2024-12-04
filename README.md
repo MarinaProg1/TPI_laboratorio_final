@@ -26,13 +26,13 @@ Nota: Los seeders crean ejemplos de usuarios comunes y un administrador con las 
 
 Email del administrador:adminUtn@gmail.com
 
-Contraseña:123456
+Contraseña:12345678
 
 Ejemplo de un usuario comun:
 
 Email del administrador:usuarioUno@gmail.com
 
-Contraseña:123456
+Contraseña:12345678
 
 # Hacer accesibles las imágenes:
 
