@@ -44,8 +44,9 @@
                             <tr>
                                 <td>
                                     {{ $product->name }}<br>
-                                    <img src="{{ asset('storage/' . $product->image) }}" class="img-thumbnail"
-                                        alt="{{ $product->name }}" style="width: 80px; height: auto;">
+
+                                    <img src="{{ asset($product->image) }}" class="img-thumbnail" alt="{{ $product->name }}"
+                                        style="width: 80px; height: auto;">
                                 </td>
                                 <td>{{ $product->pivot->quantity }}</td>
                                 <td>${{ number_format($product->price, 2) }}</td>
