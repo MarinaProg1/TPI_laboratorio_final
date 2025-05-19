@@ -39,7 +39,11 @@ Route::middleware('auth')->group(function () {
 
   
 //Rutas de carrito
-Route::resource('carts', CartController::class);
+Route::get('/carts/index',[CartController::class , 'index'])->name('carts.index');
+Route::get('/carts/create',[CartController::class, 'create'])->name('carts.create');
+Route::get('/carts/update',[CartController::class, 'update'])->name('carts.update');
+Route::put('/carts/update/{productId}', [CartController::class, 'update'])->name('carts.update');
+
 Route::post('/carts/add/{productId}', [CartController::class, 'add'])->name('carts.add');
 Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('carts.remove');
 Route::get('cart/checkout', [CartController::class, 'checkout'])->name('carts.checkout');
