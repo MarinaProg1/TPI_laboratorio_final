@@ -30,10 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
     Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}', [ProductsController::class, 'show'])->name('products.show');
     Route::get('/products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
-    Route::get('/products/{id}', [ProductsController::class, 'show'])->name('products.show');
+  
     
 
   
@@ -66,8 +67,10 @@ Route::delete('/invoices/{id}', [InvoiceController::class, 'destroy'])->name('in
 
 //Rutas de opiniones
 Route::get('/opinions', [OpinionController::class, 'index'])->name('opinions.index');
+Route::get('/opinions/create/{product}', [OpinionController::class, 'create'])->name('opinions.create');
+
+
 Route::get('/opinions/{id}', [OpinionController::class, 'show'])->name('opinions.show');
-Route::get('/opinions/create', [OpinionController::class, 'create'])->name('opinions.create');
 Route::post('/opinions', [OpinionController::class, 'store'])->name('opinions.store');
 Route::get('/opinions/{id}/edit', [OpinionController::class, 'edit'])->name('opinions.edit');
 Route::put('/opinions/{id}', [OpinionController::class, 'update'])->name('opinions.update');

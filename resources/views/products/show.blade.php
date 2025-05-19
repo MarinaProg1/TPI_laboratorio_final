@@ -1,6 +1,12 @@
 @extends('layouts.app-new')
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Lista</a></li>
@@ -53,7 +59,23 @@
                             <hr>
                         @empty
                             <p>No hay opiniones para este producto.</p>
+                            @if (auth()->check() && auth()->user()->role == 'user')
+                                <div class="text-end">
+                                    <a href="{{ route('opinions.create', ['product_id' => $product->id]) }}"
+                                        class="btn btn-success">
+                                        <i class="bi bi-plus-circle"></i> Agregar Opinión
+                                    </a>
+                                </div>
+                            @endif
                         @endforelse
+                        @if (auth()->check() && auth()->user()->role == 'user')
+                            <div class="text-end">
+                                <a href="{{ route('opinions.create', $product->id) }}" class="btn btn-success">
+                                    <i class="bi bi-plus-circle"></i> Agregar Opinión
+                                </a>
+                            </div>
+                        @endif
+
                     </div>
 
                 </div>

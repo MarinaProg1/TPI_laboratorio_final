@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     
-        public function index()
+public function index()
 {
     // Obtener el carrito activo del usuario
     $cart = Cart::where('user_id', auth()->id())

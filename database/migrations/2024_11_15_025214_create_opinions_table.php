@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->integer('qualification');
             $table->text('comment');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }

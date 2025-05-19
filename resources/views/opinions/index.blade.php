@@ -3,7 +3,12 @@
 @section('content')
     <div class="container">
         <h1>Opiniones</h1>
-        <a href="{{ route('opinions.create') }}" class="btn btn-primary mb-3">Nueva Opinión</a>
+        @if (isset($product))
+            <a href="{{ route('opinions.create', ['product' => $product->id]) }}">
+                Crear opinión para {{ $product->name }}
+            </a>
+        @endif
+
         <table class="table table-bordered">
             <thead>
                 <tr>

@@ -5,14 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\Opinion;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon; 
 
 class OpinionController extends Controller
 {
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
+   /* public function index()
     {
         $opinions = Opinion::with('user', 'product')->get();
         return view('opinions.index', compact('opinions'));
+    }*/
+    public function index($productId = null)
+{
+    if ($productId) {
+        $product = Product::with('opinions.user')->findOrFail($productId);
+        $opinions = $product->opinions;
+    } else {
+        $opinions = Opinion::with(['user', 'product'])->get();
+        $product = null;
     }
+
+    return view('opinions.index', compact('opinions', 'product'));
+}
+
+
+   public function create(Product $product)
+{
+    return view('opinions.create', compact('product'));
+}
+
 
     public function show($id)
     {
@@ -20,56 +46,27 @@ class OpinionController extends Controller
         return view('opinions.show', compact('opinion'));
     }
 
-    public function create()
-    {
-        $products = Product::all();
-        return view('opinions.create', compact('products'));
-    }
-
     public function store(Request $request)
     {
+        // Validación
         $request->validate([
-            'qualification' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string|max:255',
-            'date' => 'required|date',
             'product_id' => 'required|exists:products,id',
-        ]);
-
-        $opinion = new Opinion($request->all());
-        $opinion->user_id = auth()->id();
-        $opinion->save();
-
-        return redirect()->route('opinions.index')->with('success', 'Opinión creada con éxito.');
-    }
-
-    public function edit($id)
-    {
-        $opinion = Opinion::findOrFail($id);
-        $products = Product::all();
-        return view('opinions.edit', compact('opinion', 'products'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
+            'comment' => 'required|string|max:1000',
             'qualification' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string|max:255',
-            'date' => 'required|date',
-             'user_id', 
-             'product_id',  
         ]);
 
-        $opinion = Opinion::findOrFail($id);
-        $opinion->update($request->all());
+        // Crear la opinión
+        Opinion::create([
+            'user_id' => auth()->id(),
+            'product_id' => $request->product_id,
+            'comment' => $request->comment,
+            'qualification' => $request->qualification,
+            'date' => Carbon::now(),
+        ]);
+$product = Product::findOrFail($request->product_id);
 
-        return redirect()->route('opinions.index')->with('success', 'Opinión actualizada con éxito.');
-    }
+return redirect()->route('products.show', $product)
+                 ->with('success', 'Opinión guardada correctamente.');
 
-    public function destroy($id)
-    {
-        $opinion = Opinion::findOrFail($id);
-        $opinion->delete();
-
-        return redirect()->route('opinions.index')->with('success', 'Opinión eliminada con éxito.');
     }
 }
