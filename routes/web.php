@@ -23,10 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
  // Rutas de productos
-    
-   
     Route::get('/products', [ProductsController::class, 'index'])->name('products.index');
     Route::get('/products/create', [ProductsController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
@@ -34,16 +31,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
-  
-    
-
-  
 //Rutas de carrito
 Route::get('/carts/index',[CartController::class , 'index'])->name('carts.index');
 Route::get('/carts/create',[CartController::class, 'create'])->name('carts.create');
 Route::get('/carts/update',[CartController::class, 'update'])->name('carts.update');
 Route::put('/carts/update/{productId}', [CartController::class, 'update'])->name('carts.update');
-
 Route::post('/carts/add/{productId}', [CartController::class, 'add'])->name('carts.add');
 Route::delete('/cart/remove/{product}', [CartController::class, 'remove'])->name('carts.remove');
 Route::get('cart/checkout', [CartController::class, 'checkout'])->name('carts.checkout');
@@ -61,12 +53,12 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])-
 
 // Rutas de facturas
 Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
-Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('invoices.show');
 Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
 Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
 Route::get('/invoices/{id}/edit', [InvoiceController::class, 'edit'])->name('invoices.edit');
 Route::put('/invoices/{id}', [InvoiceController::class, 'update'])->name('invoices.update');
 Route::delete('/invoices/{id}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
+Route::get('/invoices/{id}', [InvoiceController::class, 'show'])->name('invoices.show'); // Esta debe ir al final
 
 
 //Rutas de opiniones

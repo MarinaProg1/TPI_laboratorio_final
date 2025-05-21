@@ -8,6 +8,7 @@ class Cart extends Model
 {
     protected $fillable = [
         'state',
+        'user_id',
     ];
 
     public function user()
@@ -20,6 +21,7 @@ class Cart extends Model
         return $this->belongsToMany(Product::class, 'product_carts')->withPivot('quantity');
     }
 
+   
     protected static function boot()
     {
         parent::boot();
@@ -29,6 +31,8 @@ class Cart extends Model
             }
         });
     }
+
+
 }
 
 

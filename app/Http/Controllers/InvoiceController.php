@@ -7,56 +7,57 @@ use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
-    public function index()
-    {
-        $invoices = Invoice::all();
-        return view('invoices.index', compact('invoices'));
-    }
+   public function index()
+{
+    $invoices = Invoice::with('cart.user')->get();
+    return view('invoices.index', compact('invoices'));
+}
+
 
     public function show($id)
     {
-        $invoice = Invoice::findOrFail($id);
-        return view('invoices.show', compact('invoice'));
+        $invoices = Invoice::findOrFail($id);
+        return view('invoices.show', compact('invoices'));
     }
 
-    public function create()
-    {
-        // Verificar que el usuario tiene un carrito
-        $cart = auth()->user()->cart;
-        if (!$cart) {
-            return redirect()->route('products.index')->with('error', 'No tienes un carrito activo.');
-        }
+    
+   public function create()
+{
+    $cart = auth()->user()->carts()->latest()->first();
 
-        return view('invoices.create');
+    if (!$cart || $cart->products->isEmpty()) {
+        return redirect()->route('products.index')->with('error', 'Tu carrito está vacío.');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'payment_date' => 'required|date',
-            'payment_method' => 'required|string',
-            'state' => 'required|string',
-        ]);
+    return view('invoices.create', compact('cart'));
+}
 
-        // Verificar que el usuario tiene un carrito
-        $cart = auth()->user()->cart;
-        if (!$cart) {
-            return redirect()->route('products.index')->with('error', 'No tienes un carrito activo.');
-        }
+public function store(Request $request)
+{
+    $request->validate([
+        'payment_date' => 'required|date',
+        'payment_method' => 'required|string',
+        'state' => 'required|string',
+    ]);
 
-        // Crear la factura con la relación al carrito
-        $invoice = Invoice::create([
-            'cart_id' => $cart->id,
-            'payment_date' => $request->payment_date,
-            'payment_method' => $request->payment_method,
-            'state' => 'pendiente',
-        ]);
+    $cart = auth()->user()->carts()->latest()->first();
 
-        // Vaciar el carrito
-        $cart->products()->detach();
-
-        return redirect()->route('invoices.index')->with('success', 'Factura creada con éxito.');
+    if (!$cart || $cart->products->isEmpty()) {
+        return redirect()->route('products.index')->with('error', 'Tu carrito está vacío.');
     }
+
+    $invoice = Invoice::create([
+        'cart_id' => $cart->id,
+        'payment_date' => $request->payment_date,
+        'payment_method' => $request->payment_method,
+        'state' => 'pendiente',
+    ]);
+
+    // Vaciar el carrito
+    $cart->products()->detach();
+
+    return redirect()->route('invoices.index')->with('success', 'Factura creada con éxito.');
+}
 
     public function edit($id)
     {
