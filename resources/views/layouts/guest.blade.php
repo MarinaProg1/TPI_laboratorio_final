@@ -17,7 +17,7 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div style="background-color: rgb(245, 247, 230);"
+    <div style="background-image: url('/assets/images/fondo2.jpg')"
         class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 dark:bg-gray-900">
         <!-- Logo -->
         <div class="text-center mb-6">

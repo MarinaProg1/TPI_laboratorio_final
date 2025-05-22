@@ -15,23 +15,25 @@ class OpinionController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-   /* public function index()
-    {
-        $opinions = Opinion::with('user', 'product')->get();
-        return view('opinions.index', compact('opinions'));
-    }*/
+  
     public function index($productId = null)
 {
     if ($productId) {
-        $product = Product::with('opinions.user')->findOrFail($productId);
+        $product = Product::with(['opinions' => function ($query) {
+            $query->orderBy('created_at', 'desc'); // Orden descendente por fecha
+        }, 'opinions.user'])->findOrFail($productId);
+
         $opinions = $product->opinions;
     } else {
-        $opinions = Opinion::with(['user', 'product'])->get();
+        $opinions = Opinion::with(['user', 'product'])
+                           ->orderBy('created_at', 'desc') // Orden descendente por fecha
+                           ->get();
         $product = null;
     }
 
     return view('opinions.index', compact('opinions', 'product'));
 }
+
 
 
    public function create(Product $product)

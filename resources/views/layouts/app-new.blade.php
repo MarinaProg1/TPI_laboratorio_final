@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Tienda online UTN</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="stylesheet" href="{{ asset('assets/css/site.css') }}" />
     <link rel="icon" href="{{ asset('') }}assets/images/LogoGris.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('assets/css/site.css') }}">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Fonts and icons -->
@@ -148,37 +149,27 @@
 
                             <li class="nav-item topbar-user dropdown hidden-caret">
                                 @if (Route::has('login'))
-                                    <nav class="flex items-center">
-                                        @auth
-                                            <a href="{{ route('dashboard') }}"
-                                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                                {{ Auth::user()->name }}
+                                    @auth
+                                        <span class="nav-link">{{ Auth::user()->name }}</span>
+                                        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-link nav-link">
+                                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                                            </button>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('login') }}" class="nav-link">
+                                            <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+                                        </a>
+                                        @if (Route::has('register'))
+                                            <a href="{{ route('register') }}" class="nav-link">
+                                                <i class="fas fa-user-plus"></i> Registro
                                             </a>
-
-                                            <!-- Formulario de Cierre de Sesión -->
-                                            <form method="POST" action="{{ route('logout') }}" class="ml-3 d-inline">
-                                                @csrf
-                                                <button type="submit"
-                                                    class="btn btn-link nav-item topbar-icon dropdown hidden-caret"
-                                                    style="text-decoration: none;">
-                                                    <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                                                </button>
-                                            </form>
-                                        @else
-                                            <a href="{{ route('login') }}"
-                                                class="nav-item topbar-icon dropdown hidden-caret">
-                                                <i class="fas fa-sign-in-alt"></i> Iniciar sesión
-                                            </a> <!-- Cierre de la etiqueta <a> agregado aquí -->
-                                            @if (Route::has('register'))
-                                                <a href="{{ route('register') }}"
-                                                    class="nav-item topbar-icon dropdown hidden-caret">
-                                                    <i class="fas fa-user-plus"></i> Registro
-                                                </a>
-                                            @endif
-                                        @endauth
-                                    </nav>
+                                        @endif
+                                    @endauth
                                 @endif
                             </li>
+
                         </ul>
                     </div>
                 </nav>
@@ -211,6 +202,7 @@
 
                 </div>
             </footer>
+
 
             <!--   Core JS Files   -->
             <script src="{{ asset('') }}assets/js/jquery-3.7.1.min.js"></script>

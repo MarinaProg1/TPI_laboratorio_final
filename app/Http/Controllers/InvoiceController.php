@@ -60,10 +60,11 @@ public function store(Request $request)
 }
 
     public function edit($id)
-    {
-        $invoice = Invoice::findOrFail($id);
-        return view('invoices.edit', compact('invoice'));
-    }
+{
+    $invoice = Invoice::findOrFail($id);
+    return view('invoices.edit', compact('invoice'));
+}
+
 
     public function update(Request $request, $id)
     {

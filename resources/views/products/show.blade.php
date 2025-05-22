@@ -1,4 +1,4 @@
-@extends('layouts.app-new')
+@extends('layouts.app')
 
 @section('content')
     @if (session('success'))
@@ -34,7 +34,7 @@
                             @csrf
                             <button type="submit" class="btn btn-primary btn-sm">
 
-                                <i class="fas fa-cart-plus fa-3x"></i>
+                                <i class="bi bi-cart-plus" style="font-size: 25px"></i>
 
                             </button>
                         </form>

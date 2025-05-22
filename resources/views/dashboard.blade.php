@@ -1,19 +1,21 @@
-@extends('layouts.app-new')
+@extends('layouts.app')
 
-@section('{{-- comment --}}')
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@section('content')
+    <div>
+        <h2 style="text-align:center">Sobre nosotros</h2>
+        <p>En UTN online, creemos que comprar en línea debe ser fácil, rápido y seguro. Somos una empresa dedicada a la
+            venta de
+            artículos de tecnología, hogar, moda, etc., comprometidos con brindar una experiencia de compra cómoda y
+            satisfactoria para nuestros clientes.</br>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+            Nuestro objetivo es acercarte una amplia variedad de productos de calidad al mejor precio, con un servicio ágil
+            de
+            atención al cliente y envíos a todo el país. Trabajamos día a día para mantener actualizados nuestros catálogos,
+            ofrecer promociones especiales y garantizar que cada compra sea una experiencia positiva.</br>
+
+            Desde nuestros inicios en año 2022, nos enfocamos en construir una tienda confiable, con una interfaz amigable y
+            opciones de pago seguras. Gracias a la confianza de nuestros clientes, seguimos creciendo y mejorando.</br>
+
+            Tu satisfacción es nuestra prioridad.</p>
     </div>
 @endsection

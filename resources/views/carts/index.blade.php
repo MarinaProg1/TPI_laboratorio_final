@@ -1,7 +1,8 @@
-@extends('layouts.app-new')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
+
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Lista</a></li>
@@ -111,5 +112,5 @@
         @endif
 
 
-
-    @endsection
+    </div>
+@endsection

@@ -1,5 +1,79 @@
+body{
+   background-image: url('/assets/images/fondo2.jpg');
+   font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight:600; 
+    font-style: normal;
+    font-size: 18px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+ }
+ html{
+   height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+ }
+ 
+ a{
+  text-decoration: none;
+ }
+ h2{
+  text-align: center;
+ }
+ footer{
+  background-color: black;
+  color: beige;
+  height: 100px;
+  margin: 0px;
+  font-size: 1.2rem;
+}
+.container {
+    padding: 15px;
+     flex: 1;
+}
+.nav-superior{
+    background-color: black;
+    color: beige;
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+   justify-content: space-between;
+}
+.div-nav {
+  display: flex;
+  gap: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  align-items: center;
+}
+.div-nav img:hover{
+ width: 180px;
+ height: 70px;
+ 
+}
+
+.this-a {
+  color:aliceblue; /* o el que prefieras */
+  margin: 5px;
+  padding: 5px;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.this-a:hover {
+background-color: rgba(97, 94, 94, 0.2);
+border-radius: 20px;
+ color:chocolate;
+ font-size: 1.5rem;
+}
+
 .carousel-image {
-    height: 450px;
+    height: 500px;
     object-fit: cover; 
 }
 
@@ -14,4 +88,9 @@
     font-size: 2.5rem; 
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 2); 
     color:#FF5F1F;
+}
+.product-image{
+  width: 100%;
+  height: 400px; /* o el alto que desees */
+  object-fit: cover;
 }
