@@ -24,9 +24,9 @@
                     <i class="fas fa-tag" style="color: orange;"></i>
                     ABM productos
                 </a>
-                <a href="{{ route('products.index') }}" class="this-a">
+                <a href="{{ route('categories.index') }}" class="this-a">
                     <i class="fas fa-list"style="color: orange;"></i>
-                    Lista de productos
+                    ABM categorias
                 </a>
             @else
                 <a href="{{ route('dashboard') }}" class="this-a"><i class="bi bi-people"></i> Sobre nosotros</a>
